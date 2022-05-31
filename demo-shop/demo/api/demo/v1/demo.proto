@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package api.demo.v1;
+
+option go_package = "demo/api/demo/v1;v1";
+option java_multiple_files = true;
+option java_package = "api.demo.v1";
+
+service Demo {
+	rpc CreateOrder (CreateOrderRequest) returns (ResultReply);
+	rpc UpdateOrder (UpdateOrderRequest) returns (ResultReply);
+	rpc DeleteOrder (DeleteOrderRequest) returns (ResultReply);
+	rpc GetOrder (GetOrderRequest) returns (OrderReply);
+	rpc ListOrder (ListOrderRequest) returns (ListOrderReply);
+}
+
+message Order {
+	string order_no = 1;
+	string user_name = 2;
+	float amount = 3;
+	string status = 4;
+	string file_url = 5;
+}
+
+message CreateOrderRequest {
+	Order order = 1;
+}
+
+message UpdateOrderRequest {
+	string order_no = 1;
+	float amount = 2;
+	string status = 3;
+	string file_url = 4;
+}
+
+message DeleteOrderRequest {
+	string order_no = 1;
+}
+
+message GetOrderRequest {
+	string order_no = 1;
+}
+
+message ListOrderRequest {}
+
+message ResultReply {
+	string result = 1;
+}
+
+message OrderReply {
+	Order order = 1;
+}
+
+message ListOrderReply {
+	repeated Order orders = 1;
+}
